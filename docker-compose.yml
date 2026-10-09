@@ -42,7 +42,7 @@ services:
       DLP_DEBUG: "true"
       DLP_SIEM_ENABLED: "true"
       DLP_SIEM_ENDPOINT: "http://host.docker.internal:8080/api/v1/ingest"
-      DLP_SIEM_API_KEY: "nYDuNNAEkakSYAJCWZTZ269VXfJcbySygcMswGRQCmY"
+      DLP_SIEM_API_KEY: "<generated key>"
     depends_on:
       postgres:
         condition: service_healthy

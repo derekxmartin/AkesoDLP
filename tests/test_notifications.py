@@ -189,7 +189,7 @@ class TestGetUnreadCount:
 class TestNotificationRoutes:
     def test_routes_registered(self):
         from server.main import app
-        paths = [r.path for r in app.routes if hasattr(r, "path")]
+        paths = app.openapi()["paths"]
         assert "/api/notifications" in paths
         assert "/api/notifications/count" in paths
         assert "/api/notifications/{notification_id}/read" in paths

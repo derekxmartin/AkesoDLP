@@ -231,12 +231,12 @@ class TestOutcome:
 class TestReportsRouter:
     def test_reports_router_registered(self):
         from server.main import app
-        paths = [r.path for r in app.routes if hasattr(r, "path")]
+        paths = app.openapi()["paths"]
         assert "/api/reports/summary" in paths
         assert "/api/reports/detail" in paths
         assert "/api/reports/risk" in paths
 
     def test_smart_response_endpoint_registered(self):
         from server.main import app
-        paths = [r.path for r in app.routes if hasattr(r, "path")]
+        paths = app.openapi()["paths"]
         assert "/api/incidents/{incident_id}/respond" in paths

@@ -7,7 +7,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Monitor, Wifi, WifiOff, AlertTriangle, Clock, Cpu, HardDrive, Clipboard, Globe, Search } from 'lucide-react';
+import { ArrowLeft, Monitor, Cpu, HardDrive, Clipboard, Globe, Search } from 'lucide-react';
 import useTitle from '../hooks/useTitle';
 import api from '../api/client';
 
@@ -83,8 +83,8 @@ export default function AgentDetail() {
     async function load() {
       try {
         const [agentData, groupData] = await Promise.all([
-          api.get(`/agents/${id}`),
-          api.get('/agents/groups'),
+          api.get<Agent>(`/agents/${id}`),
+          api.get<AgentGroup[]>('/agents/groups'),
         ]);
         setAgent(agentData);
         setGroups(groupData);
@@ -100,7 +100,7 @@ export default function AgentDetail() {
   async function handleGroupChange(groupId: string) {
     if (!agent) return;
     try {
-      const updated = await api.put(`/agents/${agent.id}`, {
+      const updated = await api.put<Agent>(`/agents/${agent.id}`, {
         group_id: groupId || null,
       });
       setAgent(updated);

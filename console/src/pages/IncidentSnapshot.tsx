@@ -6,7 +6,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Send, Clock, Zap, ChevronDown, AlertTriangle, Mail, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Send, Clock, Zap, AlertTriangle, Mail, CheckCircle } from 'lucide-react';
 import useTitle from '../hooks/useTitle';
 import api from '../api/client';
 
@@ -84,7 +84,6 @@ export default function IncidentSnapshot() {
   const [newNote, setNewNote] = useState('');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [responseOpen, setResponseOpen] = useState(false);
   const [responseAction, setResponseAction] = useState<string | null>(null);
   const [responseParams, setResponseParams] = useState<Record<string, string>>({});
   const [responseLoading, setResponseLoading] = useState(false);

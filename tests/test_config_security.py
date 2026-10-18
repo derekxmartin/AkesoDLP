@@ -92,11 +92,22 @@ class TestSecurityDefaults:
             )
         assert "database credentials" not in caplog.text.lower()
 
-    def test_validate_production_config_passes_with_strong_secret(self):
-        """validate_production_config should not raise when a custom
-        secret is configured."""
+    def test_validate_production_config_rejects_default_cors(self, monkeypatch):
+        import server.config as config
+
+        monkeypatch.setattr(config, "settings", Settings(
+            jwt_secret="production-grade-secret-key",
+            debug=False,
+            _env_file=None,
+        ))
+        with pytest.raises(ValueError, match="DLP_CORS_ORIGINS"):
+            validate_production_config()
+
+    def test_validate_production_config_passes_with_explicit_production_settings(self):
+        """A valid production configuration sets both JWT and CORS explicitly."""
         s = Settings(
             jwt_secret="production-grade-secret-key",
+            cors_origins=["https://console.example.test"],
             debug=False,
             _env_file=None,
         )

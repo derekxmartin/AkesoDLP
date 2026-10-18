@@ -136,7 +136,7 @@ function timeAgo(iso: string): string {
 
 /* ---------- Trend Chart (pure CSS bar chart) ---------- */
 
-function TrendChart({ buckets, days }: { buckets: Bucket[]; days: number }) {
+function TrendChart({ buckets }: { buckets: Bucket[]; days: number }) {
   // Build day-by-day data from by_severity or derive from summary
   // We'll use the by_policy buckets to show total per-day but the API gives aggregate.
   // Since the summary API returns aggregates, we'll show a bar chart of the buckets passed.
